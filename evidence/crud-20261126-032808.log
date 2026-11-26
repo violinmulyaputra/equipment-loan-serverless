@@ -1,0 +1,45 @@
+Pengujian: crud
+Waktu: Thu Nov 26 03:28:08 AM UTC 2026
+API: http://loan-a-LoadB-IcR8rSDksqWL-318289260.us-east-1.elb.amazonaws.com
+
+> GET /health 
+{"status": "ok"}
+LULUS  Health check (HTTP 200)
+
+> POST /loans {"borrower_name":"Budi","equipment_name":"Proyektor","loan_date":"2026-11-26","due_date":"2026-11-30"}
+{"id": "f4051bbf-1029-425e-9a02-ca57abe37473", "status": "dipinjam", "borrower_name": "Budi", "equipment_name": "Proyektor", "loan_date": "2026-11-26", "due_date": "2026-11-30"}
+LULUS  Tambah data (HTTP 201)
+
+> GET /loans 
+[{"id": "f4051bbf-1029-425e-9a02-ca57abe37473", "status": "dipinjam", "borrower_name": "Budi", "equipment_name": "Proyektor", "loan_date": "2026-11-26", "due_date": "2026-11-30"}]
+LULUS  Daftar data (HTTP 200)
+
+> GET /loans/f4051bbf-1029-425e-9a02-ca57abe37473 
+{"id": "f4051bbf-1029-425e-9a02-ca57abe37473", "status": "dipinjam", "borrower_name": "Budi", "equipment_name": "Proyektor", "loan_date": "2026-11-26", "due_date": "2026-11-30"}
+LULUS  Detail data (HTTP 200)
+
+> PUT /loans/f4051bbf-1029-425e-9a02-ca57abe37473 {"status":"dikembalikan"}
+{"id": "f4051bbf-1029-425e-9a02-ca57abe37473", "status": "dikembalikan", "borrower_name": "Budi", "equipment_name": "Proyektor", "loan_date": "2026-11-26", "due_date": "2026-11-30"}
+LULUS  Ubah data (HTTP 200)
+
+> POST /loans {"borrower_name":"Budi"}
+{"message": "equipment_name wajib diisi, berupa teks maksimal 100 karakter"}
+LULUS  Input tidak lengkap ditolak (HTTP 400)
+
+> POST /loans {rusak
+{"message": "Expecting property name enclosed in double quotes: line 1 column 2 (char 1)"}
+LULUS  JSON rusak ditolak (HTTP 400)
+
+> GET objek S3 tanpa kredensial
+LULUS  Akses publik S3 ditolak (HTTP 403)
+
+> DELETE /loans/f4051bbf-1029-425e-9a02-ca57abe37473 
+{"message": "Data dihapus", "id": "f4051bbf-1029-425e-9a02-ca57abe37473"}
+LULUS  Hapus data (HTTP 200)
+
+> GET /loans/f4051bbf-1029-425e-9a02-ca57abe37473 
+{"message": "Data tidak ditemukan"}
+LULUS  Data terhapus (HTTP 404)
+
+Jumlah gagal: 0
+Log: evidence/crud-20261126-032808.log

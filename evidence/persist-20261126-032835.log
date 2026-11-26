@@ -1,0 +1,18 @@
+Pengujian: persist
+Waktu: Thu Nov 26 03:28:35 AM UTC 2026
+API: http://loan-a-LoadB-IcR8rSDksqWL-318289260.us-east-1.elb.amazonaws.com
+
+> POST /loans {"borrower_name":"Budi","equipment_name":"Proyektor","loan_date":"2026-11-26","due_date":"2026-11-30"}
+{"id": "13dad3f6-3672-44d6-baa5-af2234eead15", "status": "dipinjam", "borrower_name": "Budi", "equipment_name": "Proyektor", "loan_date": "2026-11-26", "due_date": "2026-11-30"}
+LULUS  Tambah data (HTTP 201)
+
+Memperbarui konfigurasi Lambda
+
+> GET /loans/13dad3f6-3672-44d6-baa5-af2234eead15 
+{"id": "13dad3f6-3672-44d6-baa5-af2234eead15", "status": "dipinjam", "borrower_name": "Budi", "equipment_name": "Proyektor", "loan_date": "2026-11-26", "due_date": "2026-11-30"}
+LULUS  Data tetap ada (HTTP 200)
+
+2026-11-26 03:28:36        177 13dad3f6-3672-44d6-baa5-af2234eead15.json
+
+Jumlah gagal: 0
+Log: evidence/persist-20261126-032835.log
